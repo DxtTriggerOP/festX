@@ -1,0 +1,124 @@
+{% extends 'events/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="text-center my-5">
+    <h1 class="display-4 tech-gradient">NMIMS Indore Fest 2025 🎉</h1>
+    <p class="lead">Explore, Participate & Challenge Yourself!</p>
+</div>
+
+<div class="row justify-content-center">
+    <!-- Hackathon Event -->
+    <div class="col-md-5 mb-4">
+        <div class="card bg-dark text-white shadow border-0 p-4 event-card">
+            <img src="{% static 'events/hackathon.jpg' %}" class="mx-auto rounded-circle mb-3" width="150" height="150">
+            <h2 class="tech-gradient text-center">Hackathon</h2>
+            <p class="text-center small">Unleash your coding skills, collaborate, and innovate!</p>
+            <div class="text-center">
+                <a href="{% url 'register' 1 %}" class="btn btn-outline-info">Register Now</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Imagine Contest -->
+    <div class="col-md-5 mb-4">
+        <div class="card bg-dark text-white shadow border-0 p-4 event-card">
+            <img src="{% static 'events/ai_contest.jpg' %}" class="mx-auto rounded-circle mb-3" width="150" height="150">
+            <h2 class="tech-gradient text-center">AI Imagine Contest</h2>
+            <p class="text-center small">Bring your AI creativity alive—become the next AI visionary!</p>
+            <div class="text-center">
+                <a href="{% url 'register' 2 %}" class="btn btn-outline-info">Register Now</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- QUIZ SECTION -->
+<div class="container mt-5">
+    <h2 class="text-center tech-gradient">🔥 Quick Quiz: C++ & Python Challenge 🚀</h2>
+    <p class="text-center">Test your programming knowledge! Answer these quick questions.</p>
+
+    <form id="quiz-form" class="quiz-container bg-dark text-white p-4 rounded">
+        <!-- Question 1 -->
+        <div class="mb-3">
+            <label class="form-label">1. What will be the output of this Python code?</label>
+            <pre class="bg-light text-dark p-2 rounded">
+                print(3 * '5')
+            </pre>
+            <select class="form-control" name="q1">
+                <option value="">Select an answer</option>
+                <option value="15">15</option>
+                <option value="555">555</option>
+                <option value="Error">Error</option>
+            </select>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="mb-3">
+            <label class="form-label">2. Which data structure uses LIFO (Last In First Out)?</label>
+            <select class="form-control" name="q2">
+                <option value="">Select an answer</option>
+                <option value="Queue">Queue</option>
+                <option value="Stack">Stack</option>
+                <option value="Linked List">Linked List</option>
+            </select>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="mb-3">
+            <label class="form-label">3. What is the correct syntax to declare a C++ variable?</label>
+            <select class="form-control" name="q3">
+                <option value="">Select an answer</option>
+                <option value="int x;">int x;</option>
+                <option value="variable x;">variable x;</option>
+                <option value="declare x;">declare x;</option>
+            </select>
+        </div>
+
+        <div class="text-center">
+            <button type="button" class="btn btn-lg btn-outline-info" onclick="checkQuiz()">Submit Quiz</button>
+        </div>
+
+        <div id="quiz-result" class="mt-3 text-center"></div>
+    </form>
+</div>
+
+<style>
+    .quiz-container {
+        max-width: 600px;
+        margin: auto;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 255, 234, 0.5);
+    }
+    .form-control {
+        background-color: #1c1e21;
+        color: #f5f5f5;
+        border: 1px solid #00d2ff;
+    }
+    .tech-gradient {
+        background: linear-gradient(45deg, #00d2ff, #3a47d5);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: bold;
+    }
+</style>
+
+<script>
+    function checkQuiz() {
+        let score = 0;
+
+        let q1 = document.querySelector('select[name="q1"]').value;
+        let q2 = document.querySelector('select[name="q2"]').value;
+        let q3 = document.querySelector('select[name="q3"]').value;
+
+        if (q1 === "555") score++;
+        if (q2 === "Stack") score++;
+        if (q3 === "int x;") score++;
+
+        let resultBox = document.getElementById("quiz-result");
+        resultBox.innerHTML = `<h4 class='text-info'>You scored ${score}/3! ${score === 3 ? "🔥 Perfect!" : "Try again!"}</h4>`;
+    }
+</script>
+
+{% endblock %}

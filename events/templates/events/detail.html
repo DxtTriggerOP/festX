@@ -1,0 +1,37 @@
+{% extends 'events/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container py-5">
+    <div class="card bg-dark text-white shadow border-0 p-4 event-card">
+        <div class="text-center mb-4">
+            {% if event.title == "Hackathon" %}
+                <img src="{% static 'events/hackathon.jpg' %}" class="rounded-circle" width="180" height="180">
+            {% elif event.title == "AI Imagine Contest" %}
+                <img src="{% static 'events/ai_contest.jpg' %}" class="rounded-circle mb-3" width="180" height="180">
+            {% else %}
+                <img src="{% static 'events/event_placeholder.jpg' %}" class="rounded-circle mb-3" width="180" height="180">
+            {% endif %}
+            
+            <h1 class="tech-gradient display-5">{{ event.title }}</h1>
+            <p class="small">{{ event.date }} | {{ event.time }}</p>
+        </div>
+
+        <p class="text-center lead">{{ event.description }}</p>
+
+        <div class="text-center mt-4">
+            <a href="{% url 'register' event.id %}" class="btn btn-outline-info btn-lg">Register Now 🚀</a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .event-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 0 20px rgba(0, 255, 234, 0.5);
+        transition: all 0.3s ease;
+    }
+</style>
+
+{% endblock %}

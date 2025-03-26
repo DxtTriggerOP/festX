@@ -1,0 +1,93 @@
+{% extends 'events/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container py-5">
+    <div class="card bg-dark text-white shadow border-0 p-5 event-card">
+        <div class="text-center mb-4">
+            {% if event.title == "Hackathon" %}
+                <img src="{% static 'events/hackathon.jpg' %}" class="rounded-circle event-image">
+            {% elif event.title == "AI Imagine Contest" %}
+                <img src="{% static 'events/ai_contest.jpg' %}" class="rounded-circle event-image">
+            {% else %}
+                <img src="{% static 'events/event_placeholder.jpg' %}" class="rounded-circle event-image">
+            {% endif %}
+            
+            <h1 class="tech-gradient mt-3">{{ event.title }}</h1>
+            <p class="lead text-muted">Join us in the most thrilling event of the year! 🚀</p>
+        </div>
+
+        <form method="POST" action="{% url 'register' event.id %}" class="form-container">
+            {% csrf_token %}
+            
+            <div class="mb-3">
+                <label class="form-label">Full Name</label>
+                <input type="text" name="name" class="form-control" placeholder="Enter your name" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" name="email" class="form-control" placeholder="Enter your email" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Phone Number</label>
+                <input type="tel" name="phone_number" class="form-control" placeholder="Enter your phone number" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">College Name</label>
+                <input type="text" name="college" class="form-control" placeholder="Enter your college name" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Roll Number</label>
+                <input type="text" name="roll_number" class="form-control" placeholder="Enter your roll number" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Address</label>
+                <textarea name="address" class="form-control" placeholder="Enter your address" rows="2" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-outline-info btn-lg w-100 mt-3">🚀 Register Now</button>
+        </form>
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #0f0f10;
+        color: #f5f5f5;
+        font-family: 'Segoe UI', sans-serif;
+    }
+    .event-card {
+        max-width: 600px;
+        margin: auto;
+        transition: transform 0.3s ease-in-out;
+        border-radius: 10px;
+    }
+    .event-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 0 20px rgba(0, 255, 234, 0.5);
+    }
+    .event-image {
+        width: 130px;
+        height: 130px;
+        object-fit: cover;
+        border: 3px solid #00d2ff;
+    }
+    .tech-gradient {
+        background: linear-gradient(45deg, #00d2ff, #3a47d5);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: bold;
+    }
+    .form-container {
+        max-width: 500px;
+        margin: auto;
+    }
+</style>
+
+{% endblock %}
